@@ -1,6 +1,6 @@
 """Application configuration and settings using Pydantic Settings."""
 
-from typing import Optional
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -20,8 +20,8 @@ class Settings(BaseSettings):
     port: int = 8000
 
     # Vector Store (Qdrant) Configuration
-    qdrant_url: Optional[str] = None  # None indicates in-memory client
-    qdrant_api_key: Optional[str] = None
+    qdrant_url: str | None = None  # None indicates in-memory client
+    qdrant_api_key: str | None = None
     default_collection: str = "documents"
     dense_vector_dim: int = 384  # Matches default dense embedding dimension
 
@@ -43,7 +43,7 @@ class Settings(BaseSettings):
     )
 
     # LLM & Generation Configuration
-    openai_api_key: Optional[str] = None
+    openai_api_key: str | None = None
     llm_model: str = "gpt-4o-mini"
     temperature: float = 0.0
 
