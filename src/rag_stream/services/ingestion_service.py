@@ -3,7 +3,7 @@
 from typing import Any
 
 from rag_stream.adapters.embeddings import BM25SparseTokenizer, DenseEmbeddingAdapter
-from rag_stream.adapters.vector_store import QdrantVectorStoreAdapter
+from rag_stream.adapters.vector_store import QdrantVectorStoreAdapter, get_vector_store
 from rag_stream.config import settings
 from rag_stream.domain.models import Document, DocumentChunk
 from rag_stream.services.chunker import HierarchicalChunker
@@ -21,7 +21,7 @@ class IngestionService:
         chunker: HierarchicalChunker | None = None,
     ):
         """Initialize pipeline adapters and chunker."""
-        self.vector_store = vector_store or QdrantVectorStoreAdapter()
+        self.vector_store = vector_store or get_vector_store()
         self.dense_embedder = dense_embedder or DenseEmbeddingAdapter()
         self.sparse_tokenizer = sparse_tokenizer or BM25SparseTokenizer()
         self.chunker = chunker or HierarchicalChunker()

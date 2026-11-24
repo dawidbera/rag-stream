@@ -218,3 +218,15 @@ class QdrantVectorStoreAdapter:
             ),
         )
         return True
+
+
+_shared_vector_store: QdrantVectorStoreAdapter | None = None
+
+
+def get_vector_store() -> QdrantVectorStoreAdapter:
+    """Get or create the singleton Qdrant vector store adapter."""
+    global _shared_vector_store
+    if _shared_vector_store is None:
+        _shared_vector_store = QdrantVectorStoreAdapter()
+    return _shared_vector_store
+
