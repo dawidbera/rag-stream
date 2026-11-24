@@ -1,0 +1,54 @@
+# Production Docker Compose definition for RAG Stream and Qdrant Vector Store
+services:
+  # Qdrant Vector Database
+  qdrant:
+    image: qdrant/qdrant:v1.12.1
+    container_name: rag-stream-qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333" # REST API
+      - "6334:6334" # gRPC
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c '</dev/tcp/localhost/6333'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - rag_network
+
+  # RAG Stream FastAPI Application Service
+  rag-stream:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rag-stream-api
+    restart: unless-stopped
+    depends_on:
+      qdrant:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - HOST=0.0.0.0
+      - PORT=8000
+      - QDRANT_URL=http://qdrant:6333
+      - DEFAULT_COLLECTION=documents
+      - CRAG_MIN_CONFIDENCE_THRESHOLD=0.35
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    networks:
+      - rag_network
+
+volumes:
+  qdrant_data:
+    driver: local
+
+networks:
+  rag_network:
+    driver: bridge

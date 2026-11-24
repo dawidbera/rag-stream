@@ -1,0 +1,16 @@
+# Helm Chart definition for rag-stream
+apiVersion: v2
+name: rag-stream
+description: Production-Grade Advanced RAG service with Corrective RAG, hybrid search, and streaming citations.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+keywords:
+  - rag
+  - llm
+  - corrective-rag
+  - qdrant
+  - fastapi
+maintainers:
+  - name: Dawid Bera
+    email: 10242059+dawidbera@users.noreply.github.com

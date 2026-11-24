@@ -1,0 +1,14 @@
+# ConfigMap providing environment settings to the application pod
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+data:
+  ENVIRONMENT: {{ .Values.env.environment | quote }}
+  QDRANT_URL: {{ .Values.env.qdrantUrl | quote }}
+  DEFAULT_COLLECTION: {{ .Values.env.defaultCollection | quote }}
+  CRAG_MIN_CONFIDENCE_THRESHOLD: {{ .Values.env.cragMinConfidenceThreshold | quote }}
+  DENSE_VECTOR_DIM: {{ .Values.env.denseVectorDim | quote }}
