@@ -1,73 +1,36 @@
-# Build & Output
-target/
-build/
-out/
-bin/
-*.egg-info/
-
-# Java Class files
-*.class
-
-# Logs
-*.log
-
-# Allow Python requirements files
-!*requirements*.txt
-
-# IDEs
-.vscode/
-.idea/
-*.iml
-.settings/
-.project
-.classpath
-.nb-gradle/
-
-# Node.js
-node_modules/
-
-# Environment & Local Overrides
-.venv/
-venv/
-.env
-*.local
-*.env.*
-local.properties
-*.tfvars
-*.tfvars.json
-
-# Infrastructure (Terraform & Ansible)
-.terraform/
-*.tfstate
-*.tfstate.backup
-.terraform.lock.hcl
-*.retry
-
-# Frontend (Angular)
-.angular/
-dist/
-coverage/
-.sass-cache/
-
-# Testing & Reports
-build/reports/
-target/gatling/
-
-# OS files
-.DS_Store
-Thumbs.db
-schema-retry/target/
-schema-retry/.gitignore
-
-# Python & Testing artifacts
+# Python & Packaging
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+*.egg-info/
+build/
+dist/
+eggs/
+.installed.cfg
+
+# Virtual Environments & Local Env
+.venv/
+venv/
+.env
+*.env.*
+*.local
+
+# Testing, Linting & Coverage
 .pytest_cache/
+.ruff_cache/
+.mypy_cache/
 .coverage
 htmlcov/
-.mypy_cache/
-.ruff_cache/
-*.sarif
+coverage.xml
 
+# Logs & Temporary Files
+*.log
+tmp/
+
+# IDEs & OS
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
