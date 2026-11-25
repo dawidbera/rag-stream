@@ -217,9 +217,3 @@ helm lint deploy/helm/rag-stream
 # Dry-run installation
 helm install --dry-run --debug rag-stream deploy/helm/rag-stream
 ```
-
----
-
-## License
-
-This project is licensed under the Apache-2.0 License.

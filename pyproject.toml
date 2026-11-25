@@ -11,7 +11,6 @@ requires-python = ">=3.11"
 authors = [
     { name = "Dawid Bera", email = "10242059+dawidbera@users.noreply.github.com" }
 ]
-license = { text = "Apache-2.0" }
 dependencies = [
     "fastapi>=0.110.0",
     "uvicorn[standard]>=0.28.0",
