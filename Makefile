@@ -1,16 +1,18 @@
-.PHONY: help install lint format test run docker-build docker-up docker-down clean
+.PHONY: help install lint format typecheck test run docker-build docker-up docker-down clean
 
 PYTHON ?= .venv/bin/python
 PIP ?= .venv/bin/pip
 UVICORN ?= .venv/bin/uvicorn
 PYTEST ?= .venv/bin/pytest
 RUFF ?= .venv/bin/ruff
+MYPY ?= .venv/bin/mypy
 
 help:
 	@echo "Available targets:"
 	@echo "  install      - Install production and development dependencies"
 	@echo "  lint         - Run ruff linter checks"
 	@echo "  format       - Run ruff code formatter"
+	@echo "  typecheck    - Run mypy static type checker"
 	@echo "  test         - Run unit and integration tests with pytest"
 	@echo "  run          - Run FastAPI application locally with hot-reload"
 	@echo "  docker-build - Build application Docker image"
@@ -26,6 +28,9 @@ lint:
 
 format:
 	$(RUFF) format src tests
+
+typecheck:
+	$(MYPY) src
 
 test:
 	$(PYTEST) tests/
